@@ -3,22 +3,6 @@
 
 SRCS := \
   data/data.cpp \
-  navigation/imu_data_logger.cpp \
-  navigation/kalman_filter.cpp \
-  navigation/main.cpp \
-  navigation/main_log.cpp \
-  navigation/navigation.cpp \
-  embrakes/main.cpp \
-  embrakes/stepper.cpp \
-  propulsion/can/fake_can_endpoint.cpp \
-  propulsion/state_processor.cpp \
-  propulsion/main.cpp \
-  propulsion/can/can_sender.cpp \
-  propulsion/can/fake_can_sender.cpp \
-  propulsion/fake_controller.cpp \
-  propulsion/controller.cpp \
-  propulsion/file_reader.cpp \
-  propulsion/RPM_regulator.cpp \
   sensors/fake_imu.cpp \
   sensors/fake_gpio_counter.cpp \
   sensors/fake_batteries.cpp \
@@ -45,4 +29,3 @@ SRCS := \
   utils/logger.cpp \
   utils/system.cpp \
   utils/timer.cpp \
-  utils/math/kalman_multivariate.cpp \
