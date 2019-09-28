@@ -20,7 +20,7 @@
 #include <algorithm>
 #include <vector>
 
-#include "sensors/imu.hpp"
+#include "sensors/imu_spi.hpp"
 #include "utils/concurrent/thread.hpp"
 #include "utils/math/statistics.hpp"
 
