@@ -79,15 +79,15 @@ using data::NavigationVector;
 
 namespace sensors {
 
-Imu::Imu(Logger& log, uint32_t pin, uint8_t acc_scale)
-    : spi_(SPI::getInstance()),
+Imu::Imu(Logger& log, uint8_t i2c_addr_, uint8_t acc_scale)
+    : i2c_(I2C::getInstance()),
     log_(log),
-    gpio_(pin, kDirection, log),
-    pin_(pin),
+    gpio_(0, kDirection, log),
+    pin_(0),
     acc_scale_(acc_scale),
     is_online_(false)
 {
-  log_.DBG1("Imu pin: ", "%d", pin);
+  // log_.DBG1("Imu pin: ", "%d", pin);
   log_.INFO("Imu", "Creating Imu sensor now:");
   init();
 }
@@ -160,23 +160,34 @@ void Imu::writeByte(uint8_t write_reg, uint8_t write_data)
 {
   // ',' instead of ';' is to inform the compiler not to reorder function calls
   // chip selects signals must have exact ordering with respect to the spi access
-  select(),
-  spi_.write(write_reg, &write_data, 1),
-  deSelect();
+  // select(),
+  // spi_.write(write_reg, &write_data, 1),
+  // deSelect();
+
+  uint8_t buffer[2];
+  buffer[0] = write_reg;
+  buffer[1] = write_data;
+  i2c_.write(i2c_addr_, buffer, 2);
 }
 
 void Imu::readByte(uint8_t read_reg, uint8_t *read_data)
 {
-  select(),
-  spi_.read(read_reg | kReadFlag, read_data, 1),
-  deSelect();
+  // select(),
+  // spi_.read(read_reg | kReadFlag, read_data, 1),
+  // deSelect();
+
+  i2c_.write(i2c_addr_, &read_reg, 1);
+  i2c_.read(i2c_addr_, read_data, 1);
 }
 
 void Imu::readBytes(uint8_t read_reg, uint8_t *read_data, uint8_t length)
 {
-  select(),
-  spi_.read(read_reg | kReadFlag, read_data, length),
-  deSelect();
+  // select(),
+  // spi_.read(read_reg | kReadFlag, read_data, length),
+  // deSelect();
+
+  i2c_.write(i2c_addr_, &read_reg, 1);
+  i2c_.read(i2c_addr_, read_data, length);
 }
 
 void Imu::select()

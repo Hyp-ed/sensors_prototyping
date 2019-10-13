@@ -26,11 +26,12 @@
 #include "sensors/interface.hpp"
 #include "utils/logger.hpp"
 #include "utils/io/spi.hpp"
+#include "utils/io/i2c.hpp"
 #include "utils/io/gpio.hpp"
 
 namespace hyped {
 
-using hyped::utils::io::SPI;
+using hyped::utils::io::I2C;
 using utils::Logger;
 using utils::io::GPIO;
 using data::NavigationVector;
@@ -39,7 +40,7 @@ namespace sensors {
 
 class Imu : public ImuInterface {
  public:
-  Imu(Logger& log, uint32_t pin, uint8_t acc_scale = 0x08);
+  Imu(Logger& log, uint8_t i2c_addr, uint8_t acc_scale = 0x08);
   ~Imu();
   /*
    *  @brief Returns if the sensor is online
@@ -126,7 +127,8 @@ class Imu : public ImuInterface {
   void readBytes(uint8_t read_reg, uint8_t *read_buff, uint8_t length);
 
  private:
-  SPI&    spi_;
+  I2C&    i2c_;
+  uint32_t    i2c_addr_;
   Logger& log_;
   GPIO    gpio_;
   uint32_t pin_;
