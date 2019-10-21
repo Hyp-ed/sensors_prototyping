@@ -9,7 +9,6 @@ SRCS := \
   sensors/fake_temperature.cpp \
   sensors/bms.cpp \
   sensors/imu.cpp \
-  sensors/gpio_counter.cpp \
   sensors/temperature.cpp \
   sensors/bms_manager.cpp \
   sensors/imu_manager.cpp \
