@@ -220,12 +220,12 @@ void GPIO::attachGPIO()
   log_.DBG1("GPIO", "gpio %d resolved as bank,pin %d, %d", pin_, bank, pin_id);
 
   // hacking compilation compatibility for 64bit systems
-#ifdef ARCH_64
+// #ifdef ARCH_64
   uint64_t base = reinterpret_cast<uint64_t>(base_mapping_[bank]);
 #pragma message("compiling for 64 bits")
-#else
-  uint32_t base = reinterpret_cast<uint32_t>(base_mapping_[bank]);
-#endif
+// #else
+//   uint32_t base = reinterpret_cast<uint32_t>(base_mapping_[bank]);
+// #endif
   if (direction_ == gpio::Direction::kIn) {
     data_  = reinterpret_cast<volatile uint32_t*>(base + gpio::kData);
     setupWait();

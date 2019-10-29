@@ -3,29 +3,15 @@
 
 SRCS := \
   data/data.cpp \
-  sensors/fake_imu.cpp \
-  sensors/fake_gpio_counter.cpp \
-  sensors/fake_batteries.cpp \
-  sensors/fake_temperature.cpp \
-  sensors/bms.cpp \
-  sensors/imu.cpp \
-  sensors/temperature.cpp \
-  sensors/bms_manager.cpp \
-  sensors/imu_manager.cpp \
-  sensors/main.cpp \
-  state_machine/main.cpp \
-  state_machine/hyped-machine.cpp \
-  state_machine/states.cpp \
+  sensors/gpio_counter.cpp \
   utils/concurrent/barrier.cpp \
   utils/concurrent/condition_variable.cpp \
   utils/concurrent/lock.cpp \
   utils/concurrent/thread.cpp \
-  utils/io/can.cpp \
   utils/io/gpio.cpp \
-  utils/io/spi.cpp \
   utils/io/adc.cpp \
-  utils/io/i2c.cpp \
   utils/config.cpp \
   utils/logger.cpp \
   utils/system.cpp \
   utils/timer.cpp \
+  
