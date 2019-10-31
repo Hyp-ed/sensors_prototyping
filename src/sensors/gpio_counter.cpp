@@ -1,3 +1,23 @@
+/*
+ * Author: Ragnor Comerford and Jack Horsburgh
+ * Organisation: HYPED
+ * Date: 18/6/18
+ * Description:
+ *
+ *    Copyright 2018 HYPED
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 #include <stdio.h>
 #include "utils/io/gpio.hpp"
 #include "utils/timer.hpp"
@@ -16,19 +36,17 @@ GpioCounter::GpioCounter(utils::Logger& log, int pin)
      : pin_(pin),
        sys_(utils::System::getSystem()),
        log_(log)
-{
-  // TODO(anyone): initialse pointer using `new` with the appropriate value of parameter `pin`
-}
+{}
 
-void GpioCounter::run()   // where does this function come from?
+void GpioCounter::run()
 {
-  GPIO thepin(pin_, utils::io::gpio::kIn);  // TODO(anyone): remove this line and use pointer class variable- fix notation when calling functions on the pointer below
-  uint8_t val = thepin.wait();    // TODO(anyone): you will need to change this
-  stripe_counter_.count.value = 0;    // TODO(anyone): look at data.hpp to see how this is handled
+  GPIO thepin(pin_, utils::io::gpio::kIn);                // exports pin
+  uint8_t val = thepin.wait();  // Ignore first reading
+  stripe_counter_.count.value = 0;
   stripe_counter_.count.timestamp =  utils::Timer::getTimeMicros();
 
   while (sys_.running_) {
-    val = thepin.wait();    // TODO(anyone): you will need to change this
+    val = thepin.wait();
     if (val == 1) {
       stripe_counter_.count.value = stripe_counter_.count.value+1;
       log_.DBG3("TEST-KEYENCE", "Stripe Count: %d", stripe_counter_.count.value);
@@ -38,7 +56,7 @@ void GpioCounter::run()   // where does this function come from?
   }
 }
 
-StripeCounter GpioCounter::getStripeCounter()   // where does this function come from?
+StripeCounter GpioCounter::getStripeCounter()
 {
   return stripe_counter_;
 }
