@@ -11,7 +11,7 @@ using hyped::utils::Logger;
 using hyped::sensors::GpioCounter;
 using hyped::data::StripeCounter;
 
-constexpr uint32_t kStripeNum = 9999999;
+constexpr int kMaxPulse = 1000000;
 
 int main(int argc, char* argv[]) {
   hyped::utils::System::parseArgs(argc, argv);
@@ -20,8 +20,9 @@ int main(int argc, char* argv[]) {
 
   counter.start();
 
-  while (1) {
-    log.INFO("GPIOTEST", "Pulse count %d", counter.getStripeCounter().count.value);
+  while (counter.getStripeCounter().count.value < kMaxPulse) {
+    // waiting to read kMaxPulse pulses
   }
+  log.INFO("GPIOTEST", "Final pulse count %d", counter.getStripeCounter().count.value);
   
 } // end of main

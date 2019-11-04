@@ -24,6 +24,7 @@ int main(int argc, char* argv[]) {
     if (current_time - start_time > (1/rps)) {
       pin.set();
       pin.clear();
+      start_time = current_time;
     }
   }
   
