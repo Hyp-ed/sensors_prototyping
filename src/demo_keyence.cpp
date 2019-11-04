@@ -21,14 +21,14 @@ using namespace hyped::data;
 int main(int argc, char* argv[]) {
   hyped::utils::System::parseArgs(argc, argv);  // YOU NEED TO INITIALISE SYSTEM
   Logger log(true, 0);
-  GpioCounter Keyence(log, 66);
-  Keyence.start();
-  StripeCounter counter = Keyence.getStripeCounter();
+  GpioCounter keyence(log, 66);
+  keyence.start();
+  StripeCounter counter = keyence.getStripeCounter();
   while (true) {
-    StripeCounter newCount = Keyence.getStripeCounter();
-    if (newCount.count.value != counter.count.value){
-      log.DBG3("Keyence", "Stripe Count: %d", newCount.count.value);
-      counter = newCount;
+    StripeCounter new_count = keyence.getStripeCounter();
+    if (new_count.count.value != counter.count.value){
+      log.DBG3("Keyence", "Stripe Count: %d", new_count.count.value);
+      counter = new_count;
     }
 
 
