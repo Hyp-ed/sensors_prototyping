@@ -9,6 +9,7 @@ using data::Data;
 using data::StripeCounter;
 using utils::io::GPIO;
 using hyped::utils::Logger;
+using sensors::GpioInterface;
 
 namespace sensors {
 
