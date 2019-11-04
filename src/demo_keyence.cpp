@@ -11,24 +11,29 @@
 #include "utils/logger.hpp"
 #include "utils/system.hpp"
 
-using hyped::utils::io::GPIO;
-using hyped::utils::Logger;
 
-constexpr uint32_t kStripeNum = 9999999;
+using hyped::utils::io::GPIO;
+using hyped::sensors::GpioCounter;
+using hyped::utils::Logger;
+using namespace hyped::data;
 
 // TODO(anyone): once done completing GpioCounter class, format this demo file to use that class thread
 int main(int argc, char* argv[]) {
   hyped::utils::System::parseArgs(argc, argv);  // YOU NEED TO INITIALISE SYSTEM
   Logger log(true, 0);
-  GPIO pin(66, hyped::utils::io::gpio::kIn);
-  uint32_t stripe_count = 0; 
-  
-  while (stripe_count < kStripeNum) {
-    int val = pin.wait();
-    if (val == 1) {
-      stripe_count++; 
-      log.DBG("TEST-GpioCounter", "Stripe Count: %d", stripe_count);
+  GpioCounter Keyence(log, 66);
+  Keyence.start();
+  StripeCounter counter = Keyence.getStripeCounter();
+  while (true) {
+    StripeCounter newCount = Keyence.getStripeCounter();
+    if (newCount.count.value != counter.count.value){
+      log.DBG3("Keyence", "Stripe Count: %d", newCount.count.value);
+      counter = newCount;
     }
+
+
   }
+
+  return 0;
   
 } // end of main

@@ -22,11 +22,13 @@ class GpioCounter: public GpioInterface, public Thread {  // TODO(anyone): inher
   GpioCounter(utils::Logger& log, int pin);
   ~GpioCounter() {}
   // TODO(anyone): override two functions here from GpioInterface and Thread
+  void run() override; 
+  StripeCounter getStripeCounter() override;
 
  private:
   int pin_;
   // TODO(anyone): add GPIO pointer as class variable (name it keyence_)
-
+  GPIO* keyence_;
   System&  sys_;
   utils::Logger& log_;
   data::StripeCounter stripe_counter_;
