@@ -11,7 +11,7 @@ using hyped::utils::Logger;
 using hyped::sensors::GpioCounter;
 using hyped::data::StripeCounter;
 
-constexpr int kMaxPulse = 1000000;
+constexpr int kMaxPulse = 1000;
 
 int main(int argc, char* argv[]) {
   hyped::utils::System::parseArgs(argc, argv);
