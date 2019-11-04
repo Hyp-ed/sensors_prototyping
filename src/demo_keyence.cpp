@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
   while (true) {
     StripeCounter new_count = keyence.getStripeCounter();
     if (new_count.count.value != counter.count.value){
-      log.DBG3("Keyence", "Stripe Count: %d", new_count.count.value);
+      log.INFO("Keyence", "Stripe Count: %d", new_count.count.value);
       counter = new_count;
     }
 
