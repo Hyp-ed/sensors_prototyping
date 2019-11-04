@@ -13,7 +13,9 @@ namespace hyped {
 using utils::Logger;
 using utils::concurrent::Thread;
 using utils::System;
+using utils::io::GPIO;
 using data::StripeCounter;
+using sensors::GpioInterface;
 
 namespace sensors {
 
@@ -24,6 +26,8 @@ class GpioCounter: public GpioInterface, public Thread {  // TODO(anyone): inher
   // TODO(anyone): override two functions here from GpioInterface and Thread
   void run() override; 
   StripeCounter getStripeCounter() override;
+  
+
 
  private:
   int pin_;
