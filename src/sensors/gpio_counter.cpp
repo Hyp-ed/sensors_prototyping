@@ -18,17 +18,17 @@ GpioCounter::GpioCounter(utils::Logger& log, int pin)
        log_(log)
 {
   // TODO(anyone): initialse pointer using `new` with the appropriate value of parameter `pin`
+  keyence_ = new GPIO(pin, utils::io::gpio::kIn);
 }
 
 void GpioCounter::run()   // where does this function come from?
 {
-  GPIO thepin(pin_, utils::io::gpio::kIn);  // TODO(anyone): remove this line and use pointer class variable- fix notation when calling functions on the pointer below
-  uint8_t val = thepin.wait();    // TODO(anyone): you will need to change this
+  uint8_t val = keyence_->wait();    // TODO(anyone): you will need to change this
   stripe_counter_.count.value = 0;    // TODO(anyone): look at data.hpp to see how this is handled
   stripe_counter_.count.timestamp =  utils::Timer::getTimeMicros();
 
   while (sys_.running_) {
-    val = thepin.wait();    // TODO(anyone): you will need to change this
+    val = keyence_->wait();    // TODO(anyone): you will need to change this
     if (val == 1) {
       stripe_counter_.count.value = stripe_counter_.count.value+1;
       log_.DBG3("TEST-KEYENCE", "Stripe Count: %d", stripe_counter_.count.value);

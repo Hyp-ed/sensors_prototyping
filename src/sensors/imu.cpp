@@ -26,23 +26,24 @@
 
 
 // Accelerometer addresses
-constexpr uint8_t kAccelXoutH               = 0x3B;
+constexpr uint8_t kAccelXoutH               = 0x2D;
 
-constexpr uint8_t kAccelConfig              = 0x1C;
-constexpr uint8_t kAccelConfig2             = 0x1D;
+constexpr uint8_t kAccelConfig              = 0x14;
+constexpr uint8_t kAccelConfig2             = 0x15;
 
 // Temperature address
-constexpr uint8_t kTempOutH                 = 65;
+constexpr uint8_t kTempOutH                 = 0x39;
 
-constexpr uint8_t kWhoAmIImu                = 0x75;   // sensor to be at this address
+constexpr uint8_t kWhoAmIImu                = 0x00;   // sensor to be at this address
 // data to be at these addresses when read from sensor else not initialised
-constexpr uint8_t kWhoAmIResetValue1        = 0x71;
+constexpr uint8_t kWhoAmIResetValue1        = 0xEA;
 constexpr uint8_t kWhoAmIResetValue2        = 0x70;
 
 // Power Management
-constexpr uint8_t kMpuRegPwrMgmt1           = 0x6B;
+constexpr uint8_t kMpuRegPwrMgmt1           = 0x06;
 
 // Configuration
+constexpr uint8_t kFifoConfig               = 0x76;
 constexpr uint8_t kMpuRegConfig             = 0x1A;
 
 constexpr uint8_t kReadFlag                 = 0x80;
@@ -62,9 +63,9 @@ constexpr uint8_t kBitHReset                = 0x80;
 
 
 // values for FIFO
-constexpr uint8_t kFifoEnable = 0x23;   // set FIFO enable flags
-constexpr uint8_t kFifoCountH = 0x72;   // 2 bytes for H and L registers
-constexpr uint8_t kFifoRW = 0x74;
+constexpr uint8_t kFifoEn1 = 0x66;   // set FIFO enable flags
+constexpr uint8_t kFifoCountH = 0x70;   // 2 bytes for H and L registers
+constexpr uint8_t kFifoRW = 0x72;
 constexpr uint8_t kUserCtrl = 0x6A;     // to reset and enable FIFO
 // constexpr uint8_t kIntEnable = 0x38;    // for FIFO overflow, read 0x10 at this register
 constexpr uint8_t kFifoAccel = 0x08;
